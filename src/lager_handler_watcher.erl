@@ -181,7 +181,7 @@ reinstall_on_runtime_failure_test_() ->
                         _ = lager_test_backend:pop(), %% throw away application start up message
                         _ = lager_test_backend:pop(), %% throw away gen_event crash message
                         {_Severity, _Date, Msg, _Metadata} = lager_test_backend:pop(),
-                        ?assertEqual("Lager event handler lager_crash_backend exited with reason crash", lists:flatten(Msg)),
+                        ?assertEqual("gen_event lager_crash_backend installed in lager_event terminated with reason: crash", lists:flatten(Msg)),
                         {_Severity2, _Date2, Msg2, _Metadata2} = lager_test_backend:pop(),
                         ?assertMatch("Lager failed to install handler lager_crash_backend into lager_event, retrying later :"++_, lists:flatten(Msg2)),
                         ?assertEqual(false, lists:member(lager_crash_backend, gen_event:which_handlers(lager_event)))
